@@ -32,7 +32,7 @@
         if (minutes < 10) {
         minutes = "0" + minutes;
     }
-    document.body.onmouseover = function(event) {
+    document.body.onmousedown = function(event) {
   window.location.reload();
 };
     document.getElementById("u").textContent = "Обновлено в " + hour + ":" + minutes;
