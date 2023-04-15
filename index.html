@@ -15,7 +15,7 @@
 <a href="https://rusmeteo.net/weather/moskva/weekly/" class="rus-widget-square" id="2c06fc0fdfc130a36eaf9d4ef9194ce6" style="width:270px;background-color:rgb(51, 51, 51);color:rgb(250, 250, 250)">Погода</a>
 <script async src="https://rusmeteo.net/api/informerV2/2c06fc0fdfc130a36eaf9d4ef9194ce6/" type="text/javascript"></script>
 <!-- End Code Weather Forecast rusmeteo.net -->
-    <p style="text-align:center;"><a id="u" href="." title="Обновить" style="color:#fafafa;font-family: Arial;text-decoration:none;">Updated</a></p>
+    <h6 id="u"  style="color:#fafafa;font-family: Arial;text-decoration:none;cursor:pointer;">Updated</h6>
     
 
 
@@ -33,6 +33,6 @@
         minutes = "0" + minutes;
     }
     document.getElementById("u").textContent = "Обновлено в " + hour + ":" + minutes;
-    
+    document.getElementById("u").onclick = function() {window.location.reload();}
     </script>
 </html>
