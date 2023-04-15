@@ -23,7 +23,13 @@
     let date = new Date();
 
     let hour = date.getUTCHours() + 3;
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
     let minutes = date.getMinutes();
+        if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
     document.getElementById("u").textContent = "Обновлено в " + hour + ":" + minutes;
     
     </script>
