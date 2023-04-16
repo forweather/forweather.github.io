@@ -37,4 +37,17 @@
 };
     document.getElementById("u").textContent = "Обновлено в " + hour + ":" + minutes;
     </script>
+    <script>
+function link_pressed(event) {
+  event.preventDefault();
+}
+ window.onload = function() {
+  var links = document.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener("click", link_pressed, false);
+
+   }
+  }
+
+</script>
 </html>
