@@ -5,6 +5,8 @@
     <meta http-equiv="Refresh" content="3600">
 
     <title>Погода</title>
+     <style>html { visibility:hidden; }</style>
+
      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 </head>
@@ -42,6 +44,8 @@ function link_pressed(event) {
   event.preventDefault();
 }
  window.onload = function() {
+      document.getElementsByTagName("html")[0].style.visibility = "visible";
+
   var links = document.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", link_pressed, false);
