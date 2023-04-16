@@ -23,7 +23,19 @@
 
 </body>
     <script>
-    
+    var flag = false;
+    function make_clickable() {
+     flag = true;
+     document.getElementsByTagName("body")[0].style.cursor = "pointer";
+      var links = document.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    links[i].style.cursor = "pointer";
+
+   }
+
+}
+setTimeout(make_clickable, 1000 * 10);
+
     let date = new Date();
 
     let hour = date.getUTCHours() + 3;
@@ -34,10 +46,28 @@
         if (minutes < 10) {
         minutes = "0" + minutes;
     }
+    var upd = "Обновлено в " + hour + ":" + minutes;
+
+    document.body.onmouseover = function(event) {
+     if (flag == true) {
+     document.getElementById("u").textContent = "Нажмите для обновления";
+      }
+
+    }
+
+    document.body.onmouseout = function(event) {
+     if (flag == true) {
+     document.getElementById("u").textContent = upd;
+      }
+
+    }
     document.body.onmousedown = function(event) {
-  window.location.reload();
+    if (flag == true) {
+       window.location.reload();
+      }
 };
-    document.getElementById("u").textContent = "Обновлено в " + hour + ":" + minutes;
+
+    document.getElementById("u").textContent = upd;
     </script>
     <script>
 function link_pressed(event) {
@@ -46,12 +76,26 @@ function link_pressed(event) {
  window.onload = function() {
       document.getElementsByTagName("html")[0].style.visibility = "visible";
 
+
+
   var links = document.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", link_pressed, false);
+    links[i].style.cursor = "default";
+    links[i].removeAttribute("title");
+   }
 
+   var imgs = document.getElementsByTagName("img");
+  for (let i = 0; i < imgs.length; i++) {
+    imgs[i].removeAttribute("title");
    }
   }
+
+
+
+
+
+
 
 </script>
 </html>
