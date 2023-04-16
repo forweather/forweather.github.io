@@ -83,6 +83,7 @@ function link_pressed(event) {
     links[i].addEventListener("click", link_pressed, false);
     links[i].style.cursor = "default";
     links[i].removeAttribute("title");
+      links[i].removeAttribute("href");
    }
 
    var imgs = document.getElementsByTagName("img");
