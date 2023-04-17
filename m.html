@@ -7,34 +7,22 @@
     <title>Погода</title>
      <style>html { visibility:hidden; }</style>
 
-     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+     <link rel="shortcut icon" type="image/x-icon" href="icon.ico">
 
 </head>
 <body style="background-color: #333333;overflow: hidden;user-select: none;">
-    
+<h4 id="e" hidden="true" style="text-align:center;color:#fafafa;font-family: Arial">Не удалось загрузить прогноз</h4>
 <!-- Code Weather Forecast rusmeteo.net  -->
 <link href="https://api.rusmeteo.net/service/informers/css/widget-square.min.css" rel="stylesheet" type="text/css">
 <a href="https://rusmeteo.net/weather/moskva/weekly/" class="rus-widget-square" id="2c06fc0fdfc130a36eaf9d4ef9194ce6" style="width:270px;background-color:rgb(51, 51, 51);color:rgb(250, 250, 250)">Погода</a>
 <script async src="https://rusmeteo.net/api/informerV2/2c06fc0fdfc130a36eaf9d4ef9194ce6/" type="text/javascript"></script>
 <!-- End Code Weather Forecast rusmeteo.net -->
     <h6 id="u"  style="color:#fafafa;font-family: Arial;text-decoration:none;text-align:center;user-select: none;">Updated</h6>
-    
+
 
 
 </body>
     <script>
-    var flag = false;
-    function make_clickable() {
-     flag = true;
-     document.getElementsByTagName("body")[0].style.cursor = "pointer";
-      var links = document.getElementsByTagName("a");
-  for (let i = 0; i < links.length; i++) {
-    links[i].style.cursor = "pointer";
-
-   }
-
-}
-setTimeout(make_clickable, 1000 * 300 * 4);
 
     let date = new Date();
 
@@ -47,6 +35,82 @@ setTimeout(make_clickable, 1000 * 300 * 4);
         minutes = "0" + minutes;
     }
     var upd = "Обновлено в " + hour + ":" + minutes;
+
+    function update() {
+
+var urls = ["https://forweather.github.io/"];
+
+for (let i = 0; i < urls.length; i++) {
+    try {
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', urls[i], true);
+        xhr.timeout = 4000;
+        xhr.ontimeout = function () {
+                            document.getElementById('u').innerHTML = 'Проверьте подключение к интернету';
+
+
+                            upd = 'Проверьте подключение к интернету';
+                                    make_clickable();
+
+
+        }
+
+        xhr.send();
+        document.getElementById('u').innerHTML = 'Обновление...';
+        xhr.onreadystatechange = function() {
+          if (this.readyState != 4) {
+            return;
+          }
+          if (this.status != 200) {
+            if (i == urls.length - 1) {
+                                document.getElementById('u').innerHTML = 'Проверьте подключение к интернету';
+                                                            upd = 'Проверьте подключение к интернету';
+                                                                    make_clickable();
+
+
+
+            }
+            if (this.status == 0) {
+                if (i == 1) {
+                    document.getElementById('u').innerHTML = 'Проверьте подключение к интернету';
+                                                upd = 'Проверьте подключение к интернету';
+                                                        make_clickable();
+
+
+            }
+            };
+            return;
+          }
+          window.location.replace(window.location.href);
+
+        }
+        }
+
+    catch (err) {
+        1 + 1;
+
+    }
+
+}
+ }
+
+
+    var flag = false;
+    function make_clickable() {
+     flag = true;
+     document.getElementsByTagName("body")[0].style.cursor = "pointer";
+      var links = document.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    links[i].style.cursor = "pointer";
+
+   }
+
+}
+
+setTimeout(make_clickable, 1000 * 5);
+
 
     document.body.onmouseover = function(event) {
      if (flag == true) {
@@ -63,7 +127,7 @@ setTimeout(make_clickable, 1000 * 300 * 4);
     }
     document.body.onmousedown = function(event) {
     if (flag == true) {
-       window.location.reload();
+       update();
       }
 };
 
@@ -75,15 +139,27 @@ function link_pressed(event) {
 }
  window.onload = function() {
       document.getElementsByTagName("html")[0].style.visibility = "visible";
+      if (document.getElementById('2c06fc0fdfc130a36eaf9d4ef9194ce6').tagName == "A") {
+        document.getElementById('2c06fc0fdfc130a36eaf9d4ef9194ce6').textContent='';
+        document.getElementById("e").removeAttribute("hidden");
+        make_clickable();
+
+      document.getElementById('u').innerHTML = 'Проверьте подключение к интернету';
+                                                            upd = 'Проверьте подключение к интернету';
+      setTimeout(update, 1000 * 30);
+
+      }
 
 
 
   var links = document.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
-    links[i].addEventListener("click", link_pressed, false);
-    links[i].style.cursor = "default";
-    links[i].removeAttribute("title");
-      links[i].removeAttribute("href");
+      if (links[i].id != "upd") {
+        links[i].addEventListener("click", link_pressed, false);
+        links[i].style.cursor = "default";
+        links[i].removeAttribute("title");
+          links[i].removeAttribute("href");
+       }
    }
 
    var imgs = document.getElementsByTagName("img");
