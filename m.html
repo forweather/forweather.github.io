@@ -108,7 +108,7 @@ for (let i = 0; i < urls.length; i++) {
 
 }
 
-setTimeout(make_clickable, 1);
+setTimeout(make_clickable, 1000 * 300 * 4);
 
 
     document.body.onmouseover = function(event) {
@@ -145,7 +145,7 @@ function link_pressed(event) {
 
       document.getElementById('u').innerHTML = 'Проверьте подключение к интернету';
                                                             upd = 'Проверьте подключение к интернету';
-      setTimeout(update, 1000 * 30);
+      setInterval(update, 1000 * 30);
 
       }
 
