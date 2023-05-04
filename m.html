@@ -25,7 +25,7 @@
 
     let date = new Date();
 
-    let hour = date.getUTCHours() + 3;
+    let hour = (date.getUTCHours() + 3) % 24;
     if (hour < 10) {
         hour = "0" + hour;
     }
